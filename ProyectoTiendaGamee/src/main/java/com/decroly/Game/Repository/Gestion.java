@@ -1,11 +1,13 @@
 package com.decroly.Game.Repository;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -606,7 +608,111 @@ public class Gestion {
 
 	    return productos;
 	}
+	
+	
+	public  List<VideoJuego> devolverIdV(String serialNumber) {
+	    List<VideoJuego> productos = devolverVideoJuegos(); 
+	    Iterator<VideoJuego> iter = productos.iterator();
+	    
+	    while (iter.hasNext()) {
+	    	VideoJuego producto = iter.next();
+	        if (!producto.getSerialNumber().equals(serialNumber)) {
+	            iter.remove();
+	        }
+	    }
+		return  productos;
+	   }
+	
+	public  List<Perifericos> devolverIdP(String serialNumber) {
+	    List<Perifericos> productos = devolverAllPerifericos(); 
+	    List<Perifericos> perifericosFiltrados = new ArrayList<>(); 
+	    
+	    for(Perifericos perifericos : productos) {
+	    	
+	    	if (perifericos.getSerialNumber().equals(serialNumber)) {
+	    		perifericosFiltrados.add(perifericos);
+			}
+	    	
+	    }
+	   
+	    
+	   
+	    return perifericosFiltrados;
+		
+	   }
+	
+	public boolean Insertar(Producto p) {
+		 List<Producto> productos = devolverAllProductos();
+		 System.out.println(p);
+		 productos.add(p);
+		 guardarProductoTxt();
+		return true;
+		
+	
+	
+	}
+	
+public void guardarProductoTxt() {
+		
+		
+        
+        List<Producto> productos = devolverAllProductos();
+        
+        BufferedWriter br = null;
+        
 
-}
+        try {
+        	br = new BufferedWriter(new FileWriter(path, true));
+        	for (Producto p : productos) {
+        		
+        		if (p instanceof Consola) {
+    	            Consola consola = (Consola) p;
+    	            
+    	            br.write(consola.getNombre() + ", " + consola.getSerialNumber() + ", " + consola.getDescripcion() + ", " +
+    	            		consola.getPrecio() + ", " + consola.getFechaLanzamiento() + ", " + consola.getEdicion() + ", " + consola.getPlataforma() + ", " + consola.isNuevo());
+    
+    	            }
+        		
+        		if (p instanceof VideoJuego) {
+        			VideoJuego v = (VideoJuego) p;
+    	            
+    	            br.write(v.getNombre() + ", " + v.getSerialNumber() + ", " + v.getDescripcion() + ", " +
+    	            		v.getPrecio() + ", " + v.getFechaLanzamiento() + ", " + v.getEdicion() + ", " + v.getGenero() + ", " + v.getPlataforma()
+    	            		+ ", " + v.isDigital() + ", " + v.isNuevo());
+    
+    	            }
+        		
+        		if (p instanceof Perifericos) {
+        			Perifericos pe = (Perifericos) p;
+    	            
+    	            br.write(pe.getNombre() + ", " + pe.getSerialNumber() + ", " + pe.getDescripcion() + ", " +
+    	            		pe.getPrecio() + ", " + pe.getFechaLanzamiento() + ", " + pe.getEdicion() + ", " + pe.getTipoDispositivo()+ ", " + pe.isNuevo()
+    	            		+ ", " + pe.isWireless() + ", " + pe.getMarca());
+    
+    	            }
+        		else {
+        			
+        			br.write(p.getNombre() + ", " + p.getSerialNumber() + ", " + p.getDescripcion() + ", " +
+    	            		p.getPrecio() + ", " + p.getFechaLanzamiento() + ", " + p.getEdicion()) ;
+        			
+        		}
+        		
+        		
+                
+            }
+        	br.close();
+
+            
+        } catch (IOException e) {
+
+            System.out.println("Error al escribir");
+
+            e.printStackTrace();
+        } 
+        
+        }
+    }
+
+
 	
 

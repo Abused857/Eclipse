@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.decroly.Game.Model.Consola;
 import com.decroly.Game.Model.Perifericos;
@@ -87,5 +88,17 @@ public class GameService {
 			return this.gestion.filtrarProductosPorPlataforma(plataforma);
 		}
 		
+		public List <VideoJuego> getProductByIdV(String sn)
+		{
+			return this.gestion.devolverIdV(sn);
+		}
+		public List<Perifericos> getProductByIdP(String sn)
+		{
+			return this.gestion.devolverIdP(sn);
+		}
+		
+		public boolean addProduct(Producto p) {
+			return this.gestion.Insertar(p);
+		}
 		
 }
