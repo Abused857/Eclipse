@@ -68,6 +68,9 @@ public class Producto implements Serializable{
 	public static int getCont() {
 		return cont;
 	}
+	public void setCont(int i) {
+		this.cont = i;
+	}
 
 
 	private void setNombre(String nombre) {
@@ -98,7 +101,8 @@ public class Producto implements Serializable{
 	@Override
 	public String toString() {
 		
-		return "\nProducto con id: " + id +
+		return 	"\n"+
+				"\nProducto con id: " + id +
 				"\nNumero de serie: " + serialNumber +
 				"\nNombre: " + nombre +
 				"\nDescripción: " + descripcion +

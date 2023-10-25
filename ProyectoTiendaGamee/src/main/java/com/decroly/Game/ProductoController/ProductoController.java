@@ -110,7 +110,15 @@ public class ProductoController
 	public boolean addProduct(@RequestBody Producto producto) {
 		return tiendaService.addProduct(producto);
 	}
+	@PostMapping("/admin/addC")
+	public boolean addProduct(@RequestBody Consola producto) {
+		return tiendaService.addProduct(producto);
+	}
 	
+	@PostMapping("/admin/addV")
+	public boolean addProduct(@RequestBody VideoJuego producto) {
+		return tiendaService.addProduct(producto);
+	}
 	
 	
 	

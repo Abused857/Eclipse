@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -374,7 +375,7 @@ public class Gestion {
 		
 		FileReader fr = null;
 		BufferedReader br = null;
-		List <Producto> productos = new ArrayList<Producto>();
+		List <Producto> productos = new ArrayList<>();
 		
 		String linea;
 		
@@ -471,7 +472,7 @@ public class Gestion {
 		
 		}
 		
-		
+		System.out.println(productos.toString());
 		return productos;
 
 	} 
@@ -641,36 +642,79 @@ public class Gestion {
 		
 	   }
 	
+	 private int encontrarUltimaId() {
+		 ArrayList<Producto> productos = (ArrayList<Producto>) devolverAllProductos();
+	        int id = 0;
+	        for (Producto producto : productos) {
+	        
+	            if (producto.getId() > id) {
+	                id = producto.getId();
+	            }
+	        }
+	        return id;
+	    }
+	
 	public boolean Insertar(Producto p) {
-		 List<Producto> productos = devolverAllProductos();
-		 System.out.println(p);
-		 productos.add(p);
-		 guardarProductoTxt();
-		return true;
 		
-	
-	
+		
+		ArrayList<Producto> productos = (ArrayList<Producto>) devolverAllProductos();
+		
+		
+		
+		boolean estado = false;
+		 System.out.println ("1");
+		 if (productos.isEmpty()) {
+			 System.out.println ("Lista vacia");
+			 productos.add(p);
+			 guardarProductoTxt(productos);
+
+			 estado = true;
+			
+		}
+		 else 
+		 {
+			 boolean existe = false;
+			 for (Producto producto : productos) {
+				 System.out.println ("2");
+				if (producto.getSerialNumber().equals(p.getSerialNumber()) || producto.getId() == p.getId()) {
+					System.out.println ("El numero de serie ya existe");
+					System.out.println ("3");
+					existe = true;
+ 
+				}
+				
+			}
+			 if(existe == false) {
+				 System.out.println ("4");
+				 System.out.println (p);
+				 productos.add(p);
+				 guardarProductoTxt(productos);
+				 estado = true;
+			 }
+
+		 }
+		 	
+		return estado;
+
 	}
 	
-public void guardarProductoTxt() {
+public void guardarProductoTxt(ArrayList<Producto> produc) {
 		
 		
-        
-        List<Producto> productos = devolverAllProductos();
-        
+               
         BufferedWriter br = null;
         
 
         try {
-        	br = new BufferedWriter(new FileWriter(path, true));
-        	for (Producto p : productos) {
+        	br = new BufferedWriter(new FileWriter(path, false));
+        	for (Producto p : produc) {
         		
         		if (p instanceof Consola) {
     	            Consola consola = (Consola) p;
     	            
     	            br.write(consola.getNombre() + ", " + consola.getSerialNumber() + ", " + consola.getDescripcion() + ", " +
-    	            		consola.getPrecio() + ", " + consola.getFechaLanzamiento() + ", " + consola.getEdicion() + ", " + consola.getPlataforma() + ", " + consola.isNuevo());
-    
+    	            		consola.getPrecio() + ", " + consola.getFechaLanzamiento() + ", " + consola.getEdicion() + ", " + consola.getPlataforma() + ", " + consola.isNuevo() + "\n");
+    	       
     	            }
         		
         		if (p instanceof VideoJuego) {
@@ -678,7 +722,7 @@ public void guardarProductoTxt() {
     	            
     	            br.write(v.getNombre() + ", " + v.getSerialNumber() + ", " + v.getDescripcion() + ", " +
     	            		v.getPrecio() + ", " + v.getFechaLanzamiento() + ", " + v.getEdicion() + ", " + v.getGenero() + ", " + v.getPlataforma()
-    	            		+ ", " + v.isDigital() + ", " + v.isNuevo());
+    	            		+ ", " + v.isDigital() + ", " + v.isNuevo() + "\n");
     
     	            }
         		
@@ -687,13 +731,13 @@ public void guardarProductoTxt() {
     	            
     	            br.write(pe.getNombre() + ", " + pe.getSerialNumber() + ", " + pe.getDescripcion() + ", " +
     	            		pe.getPrecio() + ", " + pe.getFechaLanzamiento() + ", " + pe.getEdicion() + ", " + pe.getTipoDispositivo()+ ", " + pe.isNuevo()
-    	            		+ ", " + pe.isWireless() + ", " + pe.getMarca());
+    	            		+ ", " + pe.isWireless() + ", " + pe.getMarca() + "\n");
     
     	            }
         		else {
         			
         			br.write(p.getNombre() + ", " + p.getSerialNumber() + ", " + p.getDescripcion() + ", " +
-    	            		p.getPrecio() + ", " + p.getFechaLanzamiento() + ", " + p.getEdicion()) ;
+    	            		p.getPrecio() + ", " + p.getFechaLanzamiento() + ", " + p.getEdicion() + "\n") ;
         			
         		}
         		
@@ -710,7 +754,13 @@ public void guardarProductoTxt() {
             e.printStackTrace();
         } 
         
-        }
+     }
+
+	
+
+
+
+
     }
 
 

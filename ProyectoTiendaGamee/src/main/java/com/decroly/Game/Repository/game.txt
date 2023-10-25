@@ -1,0 +1,7 @@
+Consola 13, C-0rtg224, descripcion 9, 12, 128990705795184380, Edicion 9, ps4, true
+Consola 13, C-0rtg224, descripcion 9, 12, 128990705795184380, Edicion 9
+Consola 13, P-0r224, descripcion 9, 12, 128990705795184380, Edicion 9
+Consola 13, C-0r22ss4, descripcion 9, 12, 128990705795184380, Edicion 9, ps4, true
+Consola 13, C-0r22ss4, descripcion 9, 12, 128990705795184380, Edicion 9
+Consola 13, V-0rd22ss4, descripcion 9, 12, 128990705795184380, Edicion 9, terror, ps4, true, true
+Consola 13, V-0rd22ss4, descripcion 9, 12, 128990705795184380, Edicion 9
