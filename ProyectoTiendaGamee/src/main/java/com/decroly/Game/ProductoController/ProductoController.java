@@ -5,9 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -118,6 +120,32 @@ public class ProductoController
 	@PostMapping("/admin/addV")
 	public boolean addProduct(@RequestBody VideoJuego producto) {
 		return tiendaService.addProduct(producto);
+	}
+	@PostMapping("/admin/addPe")
+	public boolean addProduct(@RequestBody Perifericos periferico) {
+		return tiendaService.addProduct(periferico);
+	}
+	@PutMapping("/admin/ModP")
+	public boolean upgradear(@RequestBody Producto p) {
+		return tiendaService.upgradear(p);
+	}
+	@PutMapping("/admin/ModC")
+	public boolean upgradear(@RequestBody Consola p) {
+		return tiendaService.upgradear(p);
+	}
+	@PutMapping("/admin/ModV")
+	public boolean upgradear(@RequestBody VideoJuego p) {
+		return tiendaService.upgradear(p);
+	}
+	@PutMapping("/admin/ModPe")
+	public boolean upgradear(@RequestBody Perifericos p) {
+		return tiendaService.upgradear(p);
+	}
+	@DeleteMapping("/admin/Eliminar/{sn}")
+	public boolean eliminar(@PathVariable("sn") String sn)
+	{
+
+		return this.tiendaService.eliminar(sn);
 	}
 	
 	

@@ -100,5 +100,12 @@ public class GameService {
 		public boolean addProduct(Producto p) {
 			return this.gestion.Insertar(p);
 		}
+		public boolean upgradear(Producto p) {
+			return this.gestion.productoUpdate(p);
+		}
+		public boolean eliminar(String sn)
+		{
+			return this.gestion.productoEliminar(sn);
+		}
 		
 }

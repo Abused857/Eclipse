@@ -756,6 +756,64 @@ public void guardarProductoTxt(ArrayList<Producto> produc) {
         
      }
 
+
+//podria hacerlo con que si encuentra la id, simplemente hacerle un Set a ese atributo
+//pero si quiero cambiar tres atributos que tengo que hace rtres llamadas???
+//que borre el que haga match del serial number e introduzca el nuevo con los valores cambiados no, sea 1 o todos los atributos.
+
+
+public boolean productoUpdate(Producto productoUpdate) {
+	
+	boolean existe = false;
+	
+	ArrayList<Producto> productos = (ArrayList<Producto>) devolverAllProductos();
+	
+	existe = eliminarProducto(productos, productoUpdate.getSerialNumber());
+	 		if(existe == true) {
+	 			
+	 			productos.add(productoUpdate); 
+	 			guardarProductoTxt(productos);
+	 			existe = true;
+	 }
+	    
+	    return existe;
+	}
+
+public boolean productoEliminar(String productoEliminar) {
+	
+	boolean existe = false;
+	
+	ArrayList<Producto> productos = (ArrayList<Producto>) devolverAllProductos();
+	
+	existe = eliminarProducto(productos, productoEliminar);
+	if(existe == true) {
+			
+			
+			guardarProductoTxt(productos);
+			existe = true;
+}
+	    
+	    return existe;
+	}
+
+
+//esto lo hice una vez termine viendo que podia refactorizar
+private boolean eliminarProducto(ArrayList<Producto> productos, String p) {
+	
+    boolean existe = false;
+    
+    Iterator<Producto> iterator = productos.iterator();
+
+    while (iterator.hasNext()) {
+        Producto producto = iterator.next();
+        if (producto.getSerialNumber().equals(p)) {
+            iterator.remove();
+            existe = true;
+        }
+    }
+
+    return existe;
+}
 	
 
 
