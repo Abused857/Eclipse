@@ -8,6 +8,8 @@ public class Producto implements Serializable{
 	private String serialNumber;
 	private String nombre;
 	private String descripcion;
+	//me di cuenta tarde de que puse int, es double obviamente, pero bueno
+	//mi tienda no acepta centimos
 	private int precio;
 	private long fechaLanzamiento;
 	private String edicion;
