@@ -1,0 +1,4 @@
+nombre 2, P-0rd22ss41, descripcion1, 12, 128990705795184380, Edicion
+nombre 2, P-0rd22ss1411, descripcion1, 12, 128990705795184380, Edicion
+nombre 2, P-0rd22ss14111, descripcion1, 12, 128990705795184380, Edicion
+nombre 2, P-0rd2111112ss14111, descripcion1, 121, 128990705795184380, Edicion
