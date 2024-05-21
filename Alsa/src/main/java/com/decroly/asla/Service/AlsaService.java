@@ -7,9 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.springframework.stereotype.Service;
 
@@ -725,9 +728,28 @@ public class AlsaService {
       return allRutasByDestino;
   }
 	
-	private List<Ruta> buscarPorDestinoAyB(String destino1, String destino2) {
+	
+	//Regular expreon y regexp, para completar requisitos
+	private List<Ruta> buscarPorDestinoAyB(String destino1, String destino2)throws PatternSyntaxException  {
+		
+		String regex = "^[a-zA-Z\\s]+$"; 
+
+	    try {
+	    
+	        Pattern pattern = Pattern.compile(regex);
+	        if (!pattern.matcher(destino1).matches() || !pattern.matcher(destino2).matches()) {
+	            throw new PatternSyntaxException("Destinos no válidos", regex, -1);
+	        }
+	    } catch (PatternSyntaxException e) {
+	
+	        System.err.println("Error: " + e.getDescription());
+	        return Collections.emptyList();
+	    }
+
 	    List<Ruta> allRutas = rutaRepository.findAll();
 	    List<Ruta> rutasbydestinoAyB = new ArrayList<>();
+	    
+	    
 	    
 	    for (Ruta rutas : allRutas) {
 	        if (rutas.getDestino().equalsIgnoreCase(destino1) || rutas.getDestino().equalsIgnoreCase(destino2)) {
