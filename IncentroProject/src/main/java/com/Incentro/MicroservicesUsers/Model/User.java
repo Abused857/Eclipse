@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name="users")
+@Table (name="db_users")
 public class User {
 
 		@Id
@@ -54,6 +54,7 @@ public class User {
 			return id;
 		}
 
+		@SuppressWarnings("unused")
 		private void setId(String id) {
 			this.id = id;
 		}
@@ -78,6 +79,7 @@ public class User {
 			return dni;
 		}
 
+		@SuppressWarnings("unused")
 		private void setDni(String dni) {
 			this.dni = dni;
 		}

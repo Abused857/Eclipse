@@ -341,28 +341,26 @@ public class IncentroService {
 	 * if not found it returns objecT User will null values and a string not found
 	 */
 	
-	private User findUserByPhone(String phone) 
-	{
-		List <User> allUsers = findAllUsers();
-		
-		String notFound = "User not found";
-		User userFound = new User();
-		
-		for (User user : allUsers) {
-			if (user.getPhone().equals(phone)) {
-				userFound = user;
-			}
-		}
-		
-		if (userFound == null) {
-			
-			System.out.println(notFound);
-			return userFound;
-			
-		} else {
-			return userFound;
-		}
+	private User findUserByPhone(String phone) {
+	    List<User> allUsers = findAllUsers();
+	    
+	    User userFound = null;  // Inicializar como null, no como un objeto nuevo
+
+	    for (User user : allUsers) {
+	        if (user.getPhone().equals(phone)) {
+	            userFound = user; 
+	            break; 
+	        }
+	    }
+
+	    if (userFound == null) {
+	        System.out.println("User not found");
+	        return null; 
+	    } else {
+	        return userFound; 
+	    }
 	}
+
 	
 	/*
 	 * @param name: defines the name that will do the search
